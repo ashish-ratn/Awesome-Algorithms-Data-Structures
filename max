@@ -1,0 +1,59 @@
+#include<iostream>
+using namespace std;
+ 
+void printCombination(int [], int, int); 
+void combinationUtil(int [], int [], int, int, int,int);
+
+int ans;
+int main()
+{
+	int T,N,K,A[1000],data[1000];
+	cin>>T;
+	for(int i=0;i<T;i++)
+	{
+		ans=0;
+		cin>>N>>K;
+	for(int j=0;j<N;j++)
+	{
+		A[j]=j+1;
+	}
+	printCombination(A,N,K);
+	data[i]=ans;
+	}
+	for(int i=0;i<T;i++)
+	{
+		if(data[i]==1)
+		cout<<"YES"<<endl;
+		else
+		cout<<"NO"<<endl;
+	}
+	return 0;
+}
+
+void printCombination(int arr[], int n, int r) 
+{ 
+    int data[r]; 
+  
+    combinationUtil(arr, data, 0, n-1, 0, r); 
+} 
+  
+void combinationUtil(int arr[], int data[], int start, int end, 
+                     int index, int r) 
+{ 
+    if (index == r) 
+    { 
+    	int N=end+1;
+        for (int j=0; j<r; j++) {
+		int sum=0;
+		sum=sum+data[r];
+        if(N==sum) 
+        ans=1;
+    	}
+		return; 
+    }
+    for (int i=start; i<=end && end-i+1 >= r-index; i++) 
+    { 
+        data[index] = arr[i]; 
+        combinationUtil(arr, data, i+1, end, index+1, r); 
+    } 
+} 
