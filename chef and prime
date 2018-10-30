@@ -1,0 +1,126 @@
+#include <iostream>
+using namespace std;
+#include<stdio.h>
+
+int N[200],count,ans;
+void printCombination1(int [], int, int,int);
+void printCombination2(int [], int, int,int);
+void combinationUtil1(int [], int [], int, int, int, int,int); 
+void combinationUtil2(int [], int [], int, int, int, int,int);
+int main()
+{
+	int a[100],T,k;
+	cin>>T;
+		for(int i=0;i<T;i++)
+		{	
+			cin>>N[i];
+		}
+	for(int g=0;g<T;g++){
+	ans=0;k=0;	
+	for(int i=2;i<=N[g];i++)
+	{
+		count=0;
+		for(int j=1;j<=N[g];j++)
+		{
+			if(i%j==0)
+			count++;
+			if(count==3)
+			break;
+		}
+		if(count==2)
+		{
+			a[k]=i;
+			k++;
+		}	
+	}
+	printCombination1(a,k,4,g);
+	printCombination2(a,k,2,g);
+	if(ans==1)
+	cout<<"YES"<<"\n";
+	else
+	cout<<"NO"<<"\n";
+	}
+	return 0;
+}
+
+void printCombination1(int arr[], int n, int r,int g) 
+{ 
+   	// A temporary array to store all combination one by one 
+    int data[r]; 
+  
+   	// all combination using temprary array 'data[]' 
+   	combinationUtil1(arr, data, 0, n-1, 0, r,g); 
+}
+
+void printCombination2(int arr[], int n, int r,int g) 
+{ 
+   	// A temporary array to store all combination one by one 
+    int data[r]; 
+  
+   	// all combination using temprary array 'data[]' 
+   	combinationUtil2(arr, data, 0, n-1, 0, r,g); 
+}
+
+void combinationUtil1(int arr[], int data[], int start, int end, 
+                     int index, int r,int g) 
+{  
+   	if (index == r) 
+   	{   
+   		if(N[g] == (data[0]*data[1]) + (data[1]*data[0]) )
+   		ans=1;
+   		if(N[g] == (data[0]*data[1]) + (data[1]*data[2]) )
+   		ans=1;
+   		if(N[g] == (data[0]*data[1]) + (data[1]*data[3]) )
+   		ans=1;
+   		if(N[g] == (data[0]*data[2]) + (data[1]*data[0]) )
+   		ans=1;
+   		if(N[g] == (data[0]*data[2]) + (data[1]*data[2]) )
+   		ans=1;
+   		if(N[g] == (data[0]*data[2]) + (data[1]*data[3]) )
+   		ans=1;
+   		if(N[g] == (data[0]*data[3]) + (data[2]*data[1]) )
+   		ans=1;
+   		if(N[g] == (data[0]*data[3]) + (data[1]*data[0]) )
+   		ans=1;
+   		if(N[g] == (data[0]*data[3]) + (data[1]*data[2]) )
+   		ans=1;
+   		if(N[g] == (data[0]*data[3]) + (data[1]*data[3]) )
+   		ans=1;
+   		if(N[g] == (data[2]*data[3]) + (data[0]*data[1]) )
+   		ans=1;
+   		if(N[g] == (data[2]*data[3]) + (data[0]*data[2]) )
+   		ans=1;
+   		if(N[g] == (data[2]*data[3]) + (data[0]*data[3]) )
+   		ans=1;
+   		if(N[g] == (data[2]*data[3]) + (data[1]*data[2]) )
+   		ans=1;
+		if(N[g] == (data[2]*data[3]) + (data[1]*data[3]) )
+   		ans=1;
+       	return; 
+    } 
+    if(ans==1)
+    return;
+   
+    for (int i=start; i<=end && end-i+1 >= r-index; i++) 
+    { 
+        data[index] = arr[i]; 
+        combinationUtil1(arr, data, i+1, end, index+1, r,g); 
+    } 
+} 
+
+void combinationUtil2(int arr[], int data[], int start, int end, 
+                     int index, int r,int g) 
+{  
+   	if (index == r) 
+   	{   
+   		if(N[g] == (data[0]*data[1]) + (data[0]*data[1]))
+   		ans=1;
+       	return; 
+    } 
+   
+    for (int i=start; i<=end && end-i+1 >= r-index; i++) 
+    { 
+        data[index] = arr[i]; 
+        combinationUtil2(arr, data, i+1, end, index+1, r,g); 
+    } 
+} 
