@@ -1,0 +1,37 @@
+#include<iostream>
+using namespace std;
+#include<stdio.h>
+
+int main()
+{
+	int T,N[10],flag,test[10];
+	int snack[]={2010,2015,2016,2017,2019};
+	cin>>T;
+	if(T>=1 && T<=10){
+	for(int i=0;i<T;i++)
+	{
+		cin>>N[i];
+		flag=0;
+		if(N[i]>=2010 && N[i]<=2019){
+		for(int j=0;j<5;j++)
+		{
+			if(N[i]==snack[j])
+			flag=1;
+		}
+		test[i]=flag;
+		}
+		else
+		exit(0);
+	}
+	}
+	else
+	exit(0);
+	for(int i=0;i<T;i++)
+	{
+		if(test[i]==1)
+		cout<<"HOSTED"<<endl;
+		else
+		cout<<"NOT HOSTED"<<endl;
+	}
+	return 0;
+}
