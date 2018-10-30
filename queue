@@ -1,0 +1,43 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	int T,N,M,K,L,a[1000],time=0,ans[1000],p=0,k;
+	cin>>T;
+	for(int i=0;i<T;i++)
+	{
+		cin>>N>>M>>K>>L;
+	}
+	for(int i=0;i<N;i++)
+	{
+		cin>>a[i];
+	}
+	for(int j=0;j<N+M+1;j++)
+	{
+		time++;
+		if(time==L)
+		M--;
+		for(k=0;k<N;k++)
+		{
+			if(time==a[k])
+			{
+				N--;
+				M++;
+				break;
+			}
+		}
+		if(time<K){
+			if(M*L<=a[k])
+			{
+				ans[p]=time;
+				p++;
+			}
+		}
+	}
+	for(int i=0;i<T;i++){
+		cout<<ans[i]<<endl;
+	}
+	return 0;
+	
+}
