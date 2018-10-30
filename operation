@@ -1,0 +1,66 @@
+#include <iostream>
+using namespace std;
+#include<stdio.h>
+
+int N[200],A[200],ans;
+void printCombination(int [], int, int);
+void combinationUtil(int [], int [], int, int, int, int);
+int main()
+{
+	int T,B[200],arr[200];
+	cin>>T;
+	for(int i=0;i<T;i++)
+	{	
+		ans=0;
+		cin>>N[i];
+		for(int j=0;j<N[i];j++)
+		{
+			cin>>A[j];
+			arr[j]=j;
+		}
+		printCombination(arr,N[i]-1,N[i]-1);
+		for(int k=0;k<N[i];k++)
+		{
+			cin>>B[k];
+			if(A[k]==B[k])
+			ans==1;
+			else
+			ans=0;
+		}
+		if(ans==1)
+	cout<<"TAK"<<"\n";
+	else
+	cout<<"NIE"<<"\n";
+	}
+	return 0;
+}
+
+void printCombination(int arr[], int n, int r) 
+{ 
+   	// A temporary array to store all combination one by one 
+    int data[r]; 
+  
+   	// all combination using temprary array 'data[]' 
+   	combinationUtil(arr, data, 0, n-1, 0, r); 
+}
+
+void combinationUtil(int arr[], int data[], int start, int end, 
+                     int index, int r) 
+{  
+   	if (index == r) 
+   	{   
+   		for(int i=0;i<r;i++)
+   		{
+   			int j=1;
+   			A[data[i]]=A[data[i]]+j;
+   			j++;
+   		}
+       	return; 
+    } 
+   
+    for (int i=start; i<=end && end-i+1 >= r-index; i++) 
+    { 
+        data[index] = arr[i]; 
+        combinationUtil(arr, data, i+1, end, index+1, r); 
+    } 
+} 
